@@ -111,6 +111,17 @@ var Calendar = React.createClass({
     return weekStart.mapDaysInWeek(this.renderDay);
   },
 
+  nextButton: function() {
+    if (this.props.maxDate) {
+      var maxDate = new DateUtil(this.props.maxDate).safeClone();
+      if (maxDate.sameMonth(this.state.date) && maxDate.sameYear(this.state.date)) {
+        return null;
+      }
+    }
+    return <a className="datepicker__navigation datepicker__navigation--next"
+              onClick={this.increaseMonth}></a>;
+  },
+
   header: function() {
     return this.props.moment.weekdaysMin().map(function(day, key) {
       return <div className="datepicker__day" key={key}>{day}</div>;
@@ -128,9 +139,7 @@ var Calendar = React.createClass({
           <span className="datepicker__current-month">
             {this.state.date.localeFormat(this.props.locale, this.props.dateFormat)}
           </span>
-          <a className="datepicker__navigation datepicker__navigation--next"
-              onClick={this.increaseMonth}>
-          </a>
+          {this.nextButton()}
           <div>
             {this.header()}
           </div>

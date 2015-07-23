@@ -310,6 +310,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return weekStart.mapDaysInWeek(this.renderDay);
 	  },
 
+	  nextButton: function nextButton() {
+	    if (this.props.maxDate) {
+	      var maxDate = new DateUtil(this.props.maxDate).safeClone();
+	      if (maxDate.sameMonth(this.state.date) && maxDate.sameYear(this.state.date)) {
+	        return null;
+	      }
+	    }
+	    return React.createElement('a', { className: "datepicker__navigation datepicker__navigation--next",
+	      onClick: this.increaseMonth });
+	  },
+
 	  header: function header() {
 	    return this.props.moment.weekdaysMin().map(function (day, key) {
 	      return React.createElement(
@@ -335,8 +346,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          { className: "datepicker__current-month" },
 	          this.state.date.localeFormat(this.props.locale, this.props.dateFormat)
 	        ),
-	        React.createElement('a', { className: "datepicker__navigation datepicker__navigation--next",
-	          onClick: this.increaseMonth }),
+	        this.nextButton(),
 	        React.createElement(
 	          'div',
 	          null,
@@ -436,6 +446,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	DateUtil.prototype.sameMonth = function (other) {
 	  return this._date.isSame(other._date, 'month');
+	};
+
+	DateUtil.prototype.sameYear = function (other) {
+	  return this._date.isSame(other._date, 'year');
 	};
 
 	DateUtil.prototype.day = function () {

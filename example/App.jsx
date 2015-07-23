@@ -58,6 +58,7 @@ var exampleComponent = React.createClass({
         key="example1"
         selected={this.state.start_date}
         onChange={this.handleStartDateChange}
+        maxDate={moment()}
       />
       <DatePicker
         key="example2"

@@ -18,6 +18,10 @@ DateUtil.prototype.sameMonth = function(other) {
   return this._date.isSame(other._date, 'month');
 };
 
+DateUtil.prototype.sameYear = function(other) {
+  return this._date.isSame(other._date, 'year');
+};
+
 DateUtil.prototype.day = function() {
   return this._date.date();
 };
