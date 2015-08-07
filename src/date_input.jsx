@@ -38,7 +38,7 @@ var DateInput = React.createClass({
   },
 
   handleChange: function(event) {
-    var date = moment(event.target.value, this.props.dateFormat, true);
+    var date = moment(event.target.value, this.props.dateFormat, true).utc();
 
     this.setState({
       value: event.target.value

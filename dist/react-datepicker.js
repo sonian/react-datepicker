@@ -210,7 +210,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  getInitialState: function getInitialState() {
 	    return {
-	      date: new DateUtil(this.props.selected).safeClone(this.props.moment())
+	      date: new DateUtil(this.props.selected).safeClone(this.props.moment().utc())
 	    };
 	  },
 
@@ -400,7 +400,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    if (this.props.day.sameDay(this.props.selected)) classes.push('datepicker__day--selected');
 
-	    if (this.props.day.sameDay(moment())) classes.push('datepicker__day--today');
+	    if (this.props.day.sameDay(moment().utc())) classes.push('datepicker__day--today');
 
 	    if (this.isWeekend()) {
 	      classes.push('datepicker__day--weekend');
@@ -669,7 +669,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  handleChange: function handleChange(event) {
-	    var date = moment(event.target.value, this.props.dateFormat, true);
+	    var date = moment(event.target.value, this.props.dateFormat, true).utc();
 
 	    this.setState({
 	      value: event.target.value
